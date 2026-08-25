@@ -1,0 +1,133 @@
+/* =========================
+   FINANCE SECTION
+========================= */
+
+.finance-section {
+  width: 100%;
+  padding: 30px 0 55px;
+
+  background: var(--bg-main);
+}
+
+
+/* =========================
+   FINANCE CARD
+========================= */
+
+.finance-section-card {
+  position: relative;
+
+  min-height: 380px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  background-image: url("../assets/finance.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* =========================
+   DARK OVERLAY
+========================= */
+
+.finance-section-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(8, 11, 18, 0.96) 0%,
+    rgba(8, 11, 18, 0.84) 35%,
+    rgba(8, 11, 18, 0.45) 62%,
+    rgba(8, 11, 18, 0.12) 100%
+  );
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.finance-section-content {
+  position: relative;
+  z-index: 1;
+
+  max-width: 550px;
+
+  padding: 50px;
+}
+
+.finance-section-content h2 {
+  margin-bottom: 10px;
+
+  font-size: 30px;
+}
+
+.finance-section-content h3 {
+  margin: 0 0 16px;
+
+  color: var(--text-muted);
+}
+
+.finance-section-content p {
+  margin-bottom: 26px;
+
+  line-height: 1.7;
+
+  color: #dbe1e8;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.finance-section-btn {
+  display: inline-block;
+
+  padding: 12px 20px;
+
+  background: var(--accent);
+
+  border-radius: 6px;
+
+  color: white;
+
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: background 0.25s ease;
+}
+
+.finance-section-btn:hover {
+  background: var(--accent-hover);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  .finance-section-card {
+    min-height: 360px;
+
+    background-position: 65% center;
+  }
+
+  .finance-section-content {
+    padding: 35px 24px;
+  }
+
+  .finance-section-overlay {
+    background: rgba(8, 11, 18, 0.68);
+  }
+}

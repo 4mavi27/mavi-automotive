@@ -1,0 +1,170 @@
+/* =========================
+   CONTACT PAGE
+========================= */
+
+.contact-page {
+  min-height: 80vh;
+
+  padding: 70px 40px;
+
+  background: #0b0f17;
+  color: white;
+}
+
+.contact-header {
+  max-width: 700px;
+
+  margin: 0 auto 35px;
+
+  text-align: center;
+}
+
+.contact-eyebrow {
+  color: #4d8cff;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.contact-header h1 {
+  margin: 10px 0;
+
+  font-size: 46px;
+}
+
+.contact-subtitle {
+  color: #aaa;
+
+  line-height: 1.7;
+}
+
+.selected-vehicle {
+  max-width: 700px;
+
+  margin: 0 auto 20px;
+  padding: 12px 16px;
+
+  background: rgba(77, 140, 255, 0.08);
+  color: #dbe7ff;
+
+  border: 1px solid rgba(77, 140, 255, 0.35);
+  border-radius: 8px;
+}
+
+
+/* =========================
+   CONTACT FORM
+========================= */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  max-width: 700px;
+
+  margin: 0 auto;
+  padding: 30px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+}
+
+.contact-form label {
+  font-size: 14px;
+  font-weight: 600;
+
+  text-align: left;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 14px;
+
+  background: #111722;
+  color: white;
+
+  border: 1px solid #333;
+  border-radius: 8px;
+
+  font-size: 15px;
+}
+
+.contact-form textarea {
+  min-height: 130px;
+
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+
+  border-color: #4d8cff;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.contact-form button {
+  margin-top: 10px;
+  padding: 14px;
+
+  background: #4d8cff;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.contact-form button:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(77, 140, 255, 0.25);
+}
+
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
+
+.success-message {
+  margin-top: 10px;
+
+  color: #8ee3a1;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .contact-page {
+    padding: 45px 16px;
+  }
+
+  .contact-header h1 {
+    font-size: 34px;
+  }
+
+  .contact-form {
+    padding: 24px 18px;
+  }
+}

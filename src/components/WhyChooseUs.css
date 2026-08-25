@@ -1,0 +1,83 @@
+/* =========================
+   WHY CHOOSE US
+========================= */
+
+.why-choose-us {
+  width: 100%;
+  padding: 55px 0;
+
+  background: var(--bg-main);
+}
+
+.why-choose-container h2 {
+  margin-bottom: 28px;
+
+  text-align: center;
+}
+
+
+/* CARDS */
+
+.why-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+.why-card {
+  padding: 28px 20px;
+
+  text-align: center;
+
+  background: var(--bg-card);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-5px);
+
+  border-color: var(--accent);
+}
+
+.why-icon {
+  margin-bottom: 14px;
+
+  color: var(--accent);
+
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.why-card h3 {
+  margin: 0 0 10px;
+}
+
+.why-card p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  .why-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .why-cards {
+    grid-template-columns: 1fr;
+  }
+}

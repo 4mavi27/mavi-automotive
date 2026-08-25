@@ -1,0 +1,224 @@
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero-section {
+  width: 100%;
+  background: var(--bg-main);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  position: relative;
+
+  width: 100%;
+  min-height: 520px;
+
+  overflow: hidden;
+  border-radius: 12px;
+
+  background-image: url("../assets/cars/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* =========================
+   DARK OVERLAY
+========================= */
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(8, 11, 18, 0.95) 0%,
+    rgba(8, 11, 18, 0.82) 32%,
+    rgba(8, 11, 18, 0.42) 60%,
+    rgba(8, 11, 18, 0.08) 100%
+  );
+}
+
+
+/* =========================
+   HERO INNER
+========================= */
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+
+  min-height: 520px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 48px;
+}
+
+
+/* =========================
+   HERO CONTENT
+========================= */
+
+.hero-content {
+  width: 100%;
+  max-width: 520px;
+
+  text-align: left;
+}
+
+.hero-content h1 {
+  margin: 0 0 18px;
+
+  color: var(--text-main);
+
+  font-size: 58px;
+  line-height: 1.05;
+  font-weight: 700;
+
+  letter-spacing: -1.5px;
+}
+
+.hero-content p {
+  margin: 0 0 28px;
+
+  color: #e0e5ec;
+
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   HERO BUTTONS
+========================= */
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+}
+
+.hero-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 13px 22px;
+
+  border-radius: 6px;
+
+  font-weight: 600;
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+/* PRIMARY */
+
+.hero-primary-btn {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+
+  color: white;
+}
+
+.hero-primary-btn:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+
+/* SECONDARY */
+
+.hero-secondary-btn {
+  background: rgba(8, 11, 18, 0.3);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  color: white;
+}
+
+.hero-secondary-btn:hover {
+  background: white;
+
+  color: var(--bg-main);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 480px;
+
+    background-position: 60% center;
+  }
+
+  .hero-inner {
+    min-height: 480px;
+
+    padding: 0 32px;
+  }
+
+  .hero-content {
+    max-width: 440px;
+  }
+
+  .hero-content h1 {
+    font-size: 48px;
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 460px;
+
+    background-position: 65% center;
+
+    border-radius: 8px;
+  }
+
+  .hero-inner {
+    min-height: 460px;
+
+    padding: 0 20px;
+  }
+
+  .hero-overlay {
+    background: rgba(8, 11, 18, 0.7);
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-content h1 {
+    font-size: 40px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .hero-actions {
+    flex-wrap: wrap;
+  }
+}

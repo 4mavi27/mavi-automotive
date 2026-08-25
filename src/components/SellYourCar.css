@@ -1,0 +1,90 @@
+/* =========================
+   SELL YOUR CAR
+========================= */
+
+.sell-home {
+  width: 100%;
+
+  padding: 0 0 55px;
+
+  background: var(--bg-main);
+}
+
+.sell-home-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 30px;
+
+  padding: 26px 32px;
+
+  background: var(--bg-card);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+
+/* CONTENT */
+
+.sell-home-content {
+  display: flex;
+  align-items: center;
+
+  gap: 22px;
+}
+
+.sell-home-icon {
+  color: var(--accent);
+
+  font-size: 38px;
+}
+
+.sell-home-content h2 {
+  margin-bottom: 5px;
+}
+
+.sell-home-content p {
+  font-size: 15px;
+}
+
+
+/* BUTTON */
+
+.sell-home-btn {
+  flex-shrink: 0;
+
+  padding: 13px 20px;
+
+  background: var(--accent);
+
+  border-radius: 6px;
+
+  color: white;
+
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: background 0.25s ease;
+}
+
+.sell-home-btn:hover {
+  background: var(--accent-hover);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+  .sell-home-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sell-home-btn {
+    width: 100%;
+
+    text-align: center;
+  }
+}

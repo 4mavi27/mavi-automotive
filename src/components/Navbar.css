@@ -1,0 +1,155 @@
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  width: 100%;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: rgba(8, 11, 18, 0.96);
+
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid var(--border);
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================
+   NAVBAR INNER
+========================= */
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  min-height: 78px;
+}
+
+
+/* =========================
+   BRAND
+========================= */
+
+.navbar-brand {
+  margin: 0;
+
+  color: var(--text-main);
+
+  font-size: 25px;
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+}
+
+
+/* =========================
+   LINKS
+========================= */
+
+.navbar ul {
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.navbar a {
+  position: relative;
+
+  padding: 10px 0;
+
+  color: var(--text-main);
+
+  font-size: 15px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition: color 0.25s ease;
+}
+
+
+/* =========================
+   UNDERLINE
+========================= */
+
+.navbar a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 3px;
+
+  width: 0;
+  height: 2px;
+
+  background: var(--accent);
+
+  transition: width 0.25s ease;
+}
+
+
+/* =========================
+   HOVER
+========================= */
+
+.navbar a:hover {
+  color: var(--accent);
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+
+/* =========================
+   ACTIVE PAGE
+========================= */
+
+.navbar a.active-link {
+  color: var(--accent);
+}
+
+.navbar a.active-link::after {
+  width: 100%;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  .navbar-container {
+    flex-direction: column;
+
+    gap: 12px;
+
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .navbar ul {
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 10px 18px;
+  }
+
+  .navbar-brand {
+    font-size: 22px;
+  }
+}

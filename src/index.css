@@ -1,0 +1,203 @@
+/* =========================
+   GLOBAL THEME
+========================= */
+
+:root {
+  --bg-main: #080b12;
+  --bg-card: #101724;
+  --bg-soft: #111722;
+
+  --text-main: #f3f4f6;
+  --text-muted: #aab4c5;
+
+  --accent: #4d8cff;
+  --accent-hover: #3576df;
+
+  --border: #2e3440;
+
+  --shadow:
+    rgba(0, 0, 0, 0.35) 0 10px 25px;
+
+  --radius: 10px;
+
+  /* Website content width */
+  --container-width: 1200px;
+  --page-padding: 32px;
+
+  --sans:
+    system-ui,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.45;
+
+  color: var(--text-muted);
+  background: var(--bg-main);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================
+   GLOBAL RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  min-width: 320px;
+  min-height: 100vh;
+
+  background: var(--bg-main);
+  color: var(--text-muted);
+}
+
+
+/* =========================
+   ROOT
+========================= */
+
+#root {
+  width: 100%;
+  min-height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--bg-main);
+}
+
+
+/* =========================
+   GLOBAL CONTAINER
+========================= */
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+}
+
+
+/* =========================
+   HEADINGS
+========================= */
+
+h1,
+h2,
+h3 {
+  font-family: var(--sans);
+  color: var(--text-main);
+}
+
+h1 {
+  margin: 32px 0;
+
+  font-size: 56px;
+  line-height: 1.05;
+  font-weight: 600;
+
+  letter-spacing: -1.5px;
+}
+
+h2 {
+  margin: 0 0 8px;
+
+  font-size: 24px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+p {
+  margin: 0;
+
+  color: var(--text-muted);
+}
+
+
+/* =========================
+   LINKS
+========================= */
+
+a {
+  color: inherit;
+}
+
+
+/* =========================
+   FORM ELEMENTS
+========================= */
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+
+/* =========================
+   IMAGES
+========================= */
+
+img {
+  max-width: 100%;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+    --page-padding: 24px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  :root {
+    --page-padding: 18px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+}
