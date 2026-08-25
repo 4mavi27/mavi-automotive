@@ -1,7 +1,9 @@
+import { useState } from "react"
 import { NavLink } from "react-router-dom"
 import "./Navbar.css"
 
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false)
   return (
     <nav className="navbar">
       <div className="container navbar-container">
@@ -9,8 +11,18 @@ function Navbar() {
         <h2 className="navbar-brand">
           Mavi Automotive
         </h2>
+        <button
+          className="menu-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
 
-        <ul>
+        >
+          ☰
+        </button>
+
+        <ul
+          className={menuOpen ? "nav-links open" : "nav-links"}
+          onClick={() => setMenuOpen(false)}
+        >
           <li>
             <NavLink
               to="/"
