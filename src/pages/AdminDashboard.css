@@ -1,0 +1,197 @@
+/* =========================================================
+   ADMIN DASHBOARD LAYOUT
+========================================================= */
+
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+
+  background: #101724;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.admin-sidebar {
+  width: 250px;
+  min-height: 100vh;
+  padding: 30px 20px;
+
+  background: #0b1220;
+  color: white;
+}
+
+.admin-sidebar h2 {
+  margin: 0;
+
+  font-size: 22px;
+}
+
+.admin-sidebar nav {
+  margin-top: 40px;
+}
+
+.admin-sidebar nav p,
+.admin-sidebar nav a {
+  display: block;
+
+  margin: 8px 0;
+  padding: 12px 10px;
+
+  color: #cbd5e1;
+
+  border-radius: 6px;
+
+  font-size: 15px;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.admin-sidebar nav p:hover,
+.admin-sidebar nav a:hover {
+  background: #162033;
+  color: white;
+}
+
+.admin-sidebar nav p.active,
+.admin-sidebar nav a.active {
+  background: #1d4ed8;
+  color: white;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.admin-main {
+  flex: 1;
+
+  padding: 40px;
+
+  background: #101724;
+  color: white;
+}
+
+.admin-main h1 {
+  margin: 0 0 10px;
+
+  font-size: 42px;
+}
+
+.admin-main > p {
+  margin: 0;
+
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   DASHBOARD STAT CARDS
+========================================================= */
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 20px;
+
+  margin-top: 30px;
+}
+
+.stat-card {
+  padding: 24px;
+
+  background: #0b1220;
+
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #334155;
+}
+
+.stat-card h3 {
+  margin: 0 0 12px;
+
+  color: #94a3b8;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.stat-card p {
+  margin: 0;
+
+  color: white;
+
+  font-size: 30px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .admin-sidebar {
+    width: 210px;
+  }
+
+  .admin-main {
+    padding: 30px 20px;
+  }
+
+  .admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .admin-dashboard {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: auto;
+    min-height: auto;
+
+    padding: 20px;
+  }
+
+  .admin-sidebar nav {
+    margin-top: 20px;
+  }
+
+  .admin-main {
+    padding: 24px 16px;
+  }
+
+  .admin-main h1 {
+    font-size: 34px;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+}

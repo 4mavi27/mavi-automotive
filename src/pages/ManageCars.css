@@ -1,0 +1,258 @@
+/* =========================================================
+   MANAGE CARS PAGE
+========================================================= */
+
+.manage-cars-page {
+  min-height: 100vh;
+  padding: 40px;
+
+  background: #101724;
+  color: white;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.manage-cars-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+}
+
+.manage-cars-header h1 {
+  margin: 0;
+
+  font-size: 42px;
+}
+
+.add-car-btn {
+  padding: 11px 18px;
+
+  background: #2563eb;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.add-car-btn:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CARS TABLE
+========================================================= */
+
+.cars-table {
+  width: 100%;
+  margin-top: 30px;
+
+  background: #0b1220;
+
+  border-collapse: collapse;
+  border-radius: 12px;
+
+  overflow: hidden;
+}
+
+.cars-table th,
+.cars-table td {
+  padding: 16px;
+
+  text-align: left;
+  vertical-align: middle;
+
+  border-bottom: 1px solid #1f2937;
+}
+
+.cars-table th {
+  background: #162033;
+  color: #cbd5e1;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cars-table td {
+  color: #f8fafc;
+
+  font-size: 15px;
+}
+
+.cars-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.cars-table tbody tr:hover {
+  background: #111c2f;
+}
+
+
+/* =========================================================
+   TABLE COLUMN WIDTHS
+========================================================= */
+
+.cars-table th:nth-child(1),
+.cars-table td:nth-child(1) {
+  width: 5%;
+}
+
+.cars-table th:nth-child(2),
+.cars-table td:nth-child(2) {
+  width: 24%;
+}
+
+.cars-table th:nth-child(3),
+.cars-table td:nth-child(3) {
+  width: 14%;
+}
+
+.cars-table th:nth-child(4),
+.cars-table td:nth-child(4) {
+  width: 10%;
+}
+
+.cars-table th:nth-child(5),
+.cars-table td:nth-child(5) {
+  width: 12%;
+}
+
+.cars-table th:nth-child(6),
+.cars-table td:nth-child(6) {
+  width: 19%;
+}
+
+.cars-table th:nth-child(7),
+.cars-table td:nth-child(7) {
+  width: 16%;
+}
+
+
+/* =========================================================
+   CAR IMAGE
+========================================================= */
+
+.admin-car-image {
+  display: block;
+
+  width: 120px;
+  height: 80px;
+
+  object-fit: cover;
+
+  border: 1px solid #243047;
+  border-radius: 8px;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.cars-table button {
+  padding: 8px 12px;
+
+  border: none;
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.cars-table button + button {
+  margin-left: 8px;
+}
+
+.cars-table button:hover {
+  transform: translateY(-1px);
+
+  opacity: 0.9;
+}
+
+.cars-table button:first-child {
+  background: #2563eb;
+  color: white;
+}
+
+.cars-table button:last-child {
+  background: #dc2626;
+  color: white;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .manage-cars-page {
+    padding: 30px 20px;
+
+    overflow-x: auto;
+  }
+
+  .manage-cars-header h1 {
+    font-size: 36px;
+  }
+
+  .cars-table {
+    min-width: 900px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .manage-cars-page {
+    padding: 24px 16px;
+
+    overflow-x: auto;
+  }
+
+  .manage-cars-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .manage-cars-header h1 {
+    font-size: 34px;
+  }
+
+  .add-car-btn {
+    width: 100%;
+  }
+
+  .cars-table {
+    min-width: 900px;
+  }
+
+  .admin-car-image {
+    width: 100px;
+    height: 68px;
+  }
+}

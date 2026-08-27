@@ -1,0 +1,207 @@
+/* =========================================================
+   ADD CAR PAGE
+========================================================= */
+
+.add-car-page {
+  min-height: 100vh;
+  padding: 40px;
+
+  background: #101724;
+  color: white;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.add-car-page h1 {
+  margin: 0 0 30px;
+
+  font-size: 42px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   ADD CAR FORM
+========================================================= */
+
+.add-car-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  width: 100%;
+  max-width: 700px;
+
+  padding: 30px;
+
+  background: #0b1220;
+
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   FORM LABELS
+========================================================= */
+
+.add-car-form label {
+  color: #cbd5e1;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   FORM INPUTS
+========================================================= */
+
+.add-car-form input,
+.add-car-form select,
+.add-car-form textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 14px;
+
+  background: #111722;
+  color: white;
+
+  border: 1px solid #334155;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 15px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.add-car-form input::placeholder,
+.add-car-form textarea::placeholder {
+  color: #64748b;
+}
+
+.add-car-form input:focus,
+.add-car-form select:focus,
+.add-car-form textarea:focus {
+  border-color: #2563eb;
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.add-car-form textarea {
+  min-height: 130px;
+
+  resize: vertical;
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.add-car-form select {
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.add-car-form button {
+  margin-top: 10px;
+  padding: 14px 18px;
+
+  background: #2563eb;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.add-car-form button:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.22);
+}
+
+.add-car-form button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .add-car-page {
+    padding: 30px 20px;
+  }
+
+  .add-car-page h1 {
+    font-size: 36px;
+  }
+
+  .add-car-form {
+    max-width: 100%;
+    padding: 24px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .add-car-page {
+    padding: 24px 16px;
+  }
+
+  .add-car-page h1 {
+    margin-bottom: 24px;
+
+    font-size: 34px;
+  }
+
+  .add-car-form {
+    padding: 20px;
+  }
+
+  .add-car-form input,
+  .add-car-form select,
+  .add-car-form textarea {
+    padding: 13px;
+  }
+}

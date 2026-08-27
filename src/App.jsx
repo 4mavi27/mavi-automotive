@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
@@ -9,12 +9,17 @@ import Finance from './pages/Finance.jsx'
 import SellCarPage from './pages/SellCarPage.jsx'
 import About from './pages/About.jsx'
 import ScrollToTop from "./components/ScrollToTop"
+import AdminDashboard from './pages/AdminDashboard.jsx'
+import ManageCars from "./pages/ManageCars.jsx"
+import AddCar from './pages/AddCar.jsx'
 
-
-function App() {
+function AppContent() {
+  const location = useLocation()
+  const isAdminPage = location.pathname.startsWith("/admin")
   return (
-    <BrowserRouter>
-      <Navbar />
+    <>
+      {!isAdminPage && <Navbar />}
+
       <ScrollToTop />
 
       <Routes>
@@ -23,15 +28,33 @@ function App() {
         <Route path="/cars/:id" element={<CarDetailsPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/finance" element={<Finance />} />
+
         <Route
           path="/sell-your-car"
           element={<SellCarPage />}
         />
+
         <Route path="/about" element={<About />} />
+
+        <Route
+          path="/admin"
+          element={<AdminDashboard />}
+        />
+        <Route path="/admin/cars" element={<ManageCars />} />
+        <Route path="/admin/cars/add" element={<AddCar />} />
       </Routes>
 
+      {!isAdminPage && <Footer />}
+    </>
+  )
+}
 
-      <Footer />
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+
     </BrowserRouter>
   )
 }
