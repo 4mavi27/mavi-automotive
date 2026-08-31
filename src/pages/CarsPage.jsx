@@ -10,11 +10,21 @@ function CarsPage() {
   const [maxPrice, setMaxPrice] = useState("")
   const [brandFilter, setBrandFilter] = useState("All")
   const [showAllBrands, setShowAllBrands] = useState(false)
+  const [apiCars, setApiCars] = useState([])
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1)
 
   const carsPerPage = 9
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/cars")
+      .then((response) => response.json())
+      .then((data) => {
+        setApiCars(data)
+        console.log(data)
+      })
+  }, [])
 
   const brands = [
     "BMW",
@@ -33,7 +43,7 @@ function CarsPage() {
   // FILTER CARS
   // =========================
 
-  const filteredCars = cars.filter((car) => {
+  const filteredCars = apiCars.filter((car) => {
     const searchText = search.toLowerCase()
 
     const matchesSearch =
