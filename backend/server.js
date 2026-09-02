@@ -1,16 +1,111 @@
 import express from "express"
 import cors from "cors"
-import cars from "./data/cars.js"
+//import cars from "./data/cars.js"
+import mongoose from "mongoose"
+import dotenv from "dotenv"
+import Car from "./models/car.js"
+
+dotenv.config()
 
 const app = express()
 
 app.use(cors())
+app.use(express.json())
+
+
+mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("MongoDB connected")
+    })
+    .catch((error) => {
+        console.log("MongoDB connection error:", error)
+    })
 
 const PORT = 5000
 
 
-app.get("/api/cars", (req, res) => {
-    res.json(cars)
+app.get("/api/cars", async (req, res) => {
+    try {
+        const cars = await Car.find()
+        res.json(cars)
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to fetch cars"
+        })
+
+    }
+})
+app.get("/api/cars/:id", async (req, res) => {
+    try {
+        const car = await Car.findById(req.params.id)
+
+        if (!car) {
+            return res.status(404).json({
+                message: "Car not found"
+            })
+        }
+
+        res.json(car)
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to fetch car"
+        })
+    }
+})
+
+app.post("/api/cars", async (req, res) => {
+    try {
+        const newCar = await Car.create(req.body)
+
+        res.status(201).json(newCar)
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to add car"
+        })
+    }
+})
+
+app.delete("/api/cars/:id", async (req, res) => {
+    try {
+        const deletedCar = await Car.findByIdAndDelete(req.params.id)
+
+        if (!deletedCar) {
+            return res.status(404).json({
+                message: "Car not found"
+            })
+        }
+
+        res.json({
+            message: "Car deleted successfully"
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to delete car"
+        })
+    }
+})
+
+app.put("/api/cars/:id", async (req, res) => {
+    try {
+        const updatedCar = await Car.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        )
+
+        if (!updatedCar) {
+            return res.status(404).json({
+                message: "Car not found"
+            })
+        }
+
+        res.json(updatedCar)
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to update car"
+        })
+    }
 })
 
 app.listen(PORT, () => {

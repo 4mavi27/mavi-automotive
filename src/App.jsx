@@ -12,6 +12,7 @@ import ScrollToTop from "./components/ScrollToTop"
 import AdminDashboard from './pages/AdminDashboard.jsx'
 import ManageCars from "./pages/ManageCars.jsx"
 import AddCar from './pages/AddCar.jsx'
+import EditCar from './pages/EditCar.jsx'
 
 function AppContent() {
   const location = useLocation()
@@ -42,6 +43,10 @@ function AppContent() {
         />
         <Route path="/admin/cars" element={<ManageCars />} />
         <Route path="/admin/cars/add" element={<AddCar />} />
+        <Route
+          path="/admin/cars/edit/:id"
+          element={<EditCar />}
+        />
       </Routes>
 
       {!isAdminPage && <Footer />}

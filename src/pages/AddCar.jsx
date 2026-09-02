@@ -34,21 +34,33 @@ function AddCar() {
             mileage: Number(mileage),
             fuel,
             transmission,
-            featured,
-            image
+            featured
+            //image
         }
 
-        console.log(newCar)
-        setSubmitted(true)
-        setMake("")
-        setModel("")
-        setPrice("")
-        setYear("")
-        setMileage("")
-        setFuel("Petrol")
-        setTransmission("Automatic")
-        setFeatured(false)
-        setImage(null)
+        fetch("http://localhost:5000/api/cars", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newCar)
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                setSubmitted(true)
+
+
+                setMake("")
+                setModel("")
+                setPrice("")
+                setYear("")
+                setMileage("")
+                setFuel("Petrol")
+                setTransmission("Automatic")
+                setFeatured(false)
+                setImage(null)
+            })
     }
     return (
         <section className="add-car-page">

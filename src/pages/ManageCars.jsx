@@ -1,8 +1,32 @@
 import { Link } from "react-router-dom"
-import cars from "../data/cars.js"
+//import cars from "../data/cars.js"
+import { useEffect, useState } from "react"
 import "./ManageCars.css"
 
 function ManageCars() {
+    const [cars, setCars] = useState([])
+
+    useEffect(() => {
+        fetch("http://localhost:5000/api/cars")
+            .then((response) => response.json())
+            .then((data) => {
+                setCars(data)
+            })
+    }, [])
+
+
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/api/cars/${id}`, {
+            method: "DELETE"
+        })
+            .then((response) => response.json())
+            .then(() => {
+                setCars((currentCars) =>
+                    currentCars.filter((car) => car.id !== id)
+                )
+            })
+    }
+
     return (
         <section className="manage-cars-page">
             <div className="manage-cars-header">
@@ -44,8 +68,12 @@ function ManageCars() {
                                 />
                             </td>
                             <td>
-                                <button>Edit</button>
-                                <button>Delete</button>
+                                <Link to={`/admin/cars/edit/${car.id}`}>
+                                    Edit
+                                </Link>
+                                <button onClick={() => handleDelete(car.id)}>
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))}
