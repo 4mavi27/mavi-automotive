@@ -9,11 +9,11 @@ function AddCar() {
     const [fuel, setFuel] = useState("Petrol")
     const [transmission, setTransmission] = useState("Automatic")
     const [featured, setFeatured] = useState(false)
-    const [image, setImage] = useState(null)
+    const [images, setImages] = useState([])
     const [submitted, setSubmitted] = useState(false)
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         if (
             !make ||
@@ -25,6 +25,21 @@ function AddCar() {
             alert("Please fill in all required fields.")
             return
         }
+        const formData = new FormData()
+
+        images.forEach((image) => {
+            formData.append("images", image)
+        })
+
+        const uploadResponse = await fetch(
+            "http://localhost:5000/api/upload",
+            {
+                method: "POST",
+                body: formData
+            }
+        )
+
+        const uploadData = await uploadResponse.json()
 
         const newCar = {
             make,
@@ -34,8 +49,8 @@ function AddCar() {
             mileage: Number(mileage),
             fuel,
             transmission,
-            featured
-            //image
+            featured,
+            images: uploadData.images
         }
 
         fetch("http://localhost:5000/api/cars", {
@@ -59,7 +74,7 @@ function AddCar() {
                 setFuel("Petrol")
                 setTransmission("Automatic")
                 setFeatured(false)
-                setImage(null)
+                setImages([])
             })
     }
     return (
@@ -137,11 +152,14 @@ function AddCar() {
                     <option value="false">No</option>
                     <option value="true">Yes</option>
                 </select>
-                <label>Image</label>
+                <label>Images</label>
                 <input
                     type="file"
+                    multiple
                     accept="image/*"
-                    onChange={(event) => setImage(event.target.files[0])}
+                    onChange={(event) => {
+                        setImages(Array.from(event.target.files))
+                    }}
                 />
 
                 <button type="submit">

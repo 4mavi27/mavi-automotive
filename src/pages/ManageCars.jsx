@@ -62,7 +62,7 @@ function ManageCars() {
                             <td>{car.fuel}</td>
                             <td>
                                 <img
-                                    src={car.image}
+                                    src={car.images?.[0]}
                                     alt={`${car.make} ${car.model}`}
                                     className="admin-car-image"
                                 />

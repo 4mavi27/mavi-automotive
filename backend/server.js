@@ -4,6 +4,8 @@ import cors from "cors"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import Car from "./models/car.js"
+import cloudinary from "./config/cloudinary.js"
+import upload from "./middleware/upload.js"
 
 dotenv.config()
 
@@ -23,6 +25,46 @@ mongoose
     })
 
 const PORT = 5000
+
+const uploadToCloudinary = (fileBuffer) => {
+    return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+            {
+                folder: "mavi-automotive"
+            },
+            (error, result) => {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(result)
+                }
+            }
+        )
+
+        stream.end(fileBuffer)
+    })
+}
+app.post("/api/upload", upload.array("images", 10), async (req, res) => {
+    try {
+        const uploadResults = await Promise.all(
+            req.files.map((file) =>
+                uploadToCloudinary(file.buffer)
+            )
+        )
+
+        const imageUrls = uploadResults.map(
+            (result) => result.secure_url
+        )
+
+        res.status(200).json({
+            images: imageUrls
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to upload images"
+        })
+    }
+})
 
 
 app.get("/api/cars", async (req, res) => {

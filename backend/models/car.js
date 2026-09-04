@@ -8,7 +8,8 @@ const carSchema = new mongoose.Schema({
     mileage: Number,
     fuel: String,
     transmission: String,
-    featured: Boolean
+    featured: Boolean,
+    images: [String]
 })
 
 carSchema.set("toJSON", {
