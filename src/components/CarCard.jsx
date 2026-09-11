@@ -4,7 +4,7 @@ function CarCard(props) {
   return (
     <div className="car-card">
       <img
-        src={props.image}
+        src={props.images?.[0]}
         alt={`${props.make} ${props.model}`}
       />
 

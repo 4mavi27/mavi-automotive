@@ -44,7 +44,7 @@ const uploadToCloudinary = (fileBuffer) => {
         stream.end(fileBuffer)
     })
 }
-app.post("/api/upload", upload.array("images", 10), async (req, res) => {
+app.post("/api/upload", upload.array("images", 25), async (req, res) => {
     try {
         const uploadResults = await Promise.all(
             req.files.map((file) =>

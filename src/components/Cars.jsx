@@ -1,9 +1,25 @@
 import CarCard from "./CarCard"
-import cars from "../data/cars.js"
+import { useEffect, useState } from "react"
+//import cars from "../data/cars.js"
 import "./Cars.css"
 
 function Cars() {
-  const featuredCars = cars.filter((car) => car.featured)
+  const [cars, setCars] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/cars")
+      .then((response) => response.json())
+      .then((data) => {
+        setCars(data)
+      })
+      .catch((error) => {
+        console.log("Failed to fetch featured cars:", error)
+      })
+  }, [])
+
+  const featuredCars = cars.filter(
+    (car) => car.featured
+  )
 
   const sliderCars = [
     ...featuredCars,
@@ -31,7 +47,7 @@ function Cars() {
                 year={car.year}
                 mileage={car.mileage}
                 fuel={car.fuel}
-                image={car.image}
+                images={car.images}
               />
             ))}
 

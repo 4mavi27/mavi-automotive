@@ -1,15 +1,16 @@
 import "./CarDetailsPage.css"
 import { useParams, Link } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
-import cars from "../data/cars.js"
+//import cars from "../data/cars.js"
 
 function CarDetailsPage() {
   const { id } = useParams()
 
-  // Current car
-  const car = cars.find((car) => {
-    return car.id === Number(id)
-  })
+  // Car data from backent
+  const [car, setCar] = useState(null)
+
+  // Loading state
+  const [loading, setLoading] = useState(true)
 
   // Selected thumbnail
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
@@ -65,10 +66,25 @@ function CarDetailsPage() {
     )
   }
 
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/cars/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Car not found")
+        }
 
-  // =========================================
-  // CAR CHANGE
-  // =========================================
+        return response.json()
+      })
+      .then((data) => {
+        setCar(data)
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.log(error)
+        setCar(null)
+        setLoading(false)
+      })
+  }, [id])
 
   useEffect(() => {
     if (!car) {
@@ -172,7 +188,13 @@ function CarDetailsPage() {
   // =========================================
   // CAR NOT FOUND
   // =========================================
-
+  if (loading) {
+    return (
+      <section className="car-details-page">
+        <h1>Loading car...</h1>
+      </section>
+    )
+  }
   if (!car) {
     return (
       <section className="car-details-page">
@@ -398,102 +420,99 @@ function CarDetailsPage() {
             {car.images &&
               car.images.length > 0 && (
 
-              <div className="gallery-area">
+                <div className="gallery-area">
 
-                <div className="car-gallery-slider">
+                  <div className="car-gallery-slider">
 
 
-                  {/* Previous Arrow */}
+                    {/* Previous Arrow */}
 
-                  <button
-                    className={`gallery-arrow gallery-arrow-left ${
-                      !canScrollLeft
+                    <button
+                      className={`gallery-arrow gallery-arrow-left ${!canScrollLeft
                         ? "hidden-arrow"
                         : ""
-                    }`}
-                    onClick={() =>
-                      scrollGallery(-1)
-                    }
-                    disabled={!canScrollLeft}
-                    aria-label="Previous images"
-                  >
-                    ‹
-                  </button>
+                        }`}
+                      onClick={() =>
+                        scrollGallery(-1)
+                      }
+                      disabled={!canScrollLeft}
+                      aria-label="Previous images"
+                    >
+                      ‹
+                    </button>
 
 
-                  {/* Thumbnail viewport */}
+                    {/* Thumbnail viewport */}
 
-                  <div
-                    className="thumbnail-viewport"
-                    ref={thumbnailViewportRef}
-                    onScroll={
-                      updateGalleryArrows
-                    }
-                  >
+                    <div
+                      className="thumbnail-viewport"
+                      ref={thumbnailViewportRef}
+                      onScroll={
+                        updateGalleryArrows
+                      }
+                    >
 
-                    <div className="thumbnail-track">
+                      <div className="thumbnail-track">
 
-                      {car.images.map(
-                        (image, index) => (
+                        {car.images.map(
+                          (image, index) => (
 
-                          <img
-                            key={index}
+                            <img
+                              key={index}
 
-                            src={image}
+                              src={image}
 
-                            alt={`${car.make} ${car.model} ${
-                              index + 1
-                            }`}
+                              alt={`${car.make} ${car.model} ${index + 1
+                                }`}
 
-                            className={
-                              selectedImageIndex ===
-                              index
-                                ? "active-thumbnail"
-                                : ""
-                            }
+                              className={
+                                selectedImageIndex ===
+                                  index
+                                  ? "active-thumbnail"
+                                  : ""
+                              }
 
-                            onClick={() =>
-                              setSelectedImageIndex(
-                                index
-                              )
-                            }
+                              onClick={() =>
+                                setSelectedImageIndex(
+                                  index
+                                )
+                              }
 
-                            onLoad={
-                              updateGalleryArrows
-                            }
-                          />
+                              onLoad={
+                                updateGalleryArrows
+                              }
+                            />
 
-                        )
-                      )}
+                          )
+                        )}
+
+                      </div>
 
                     </div>
 
-                  </div>
 
+                    {/* Next Arrow */}
 
-                  {/* Next Arrow */}
-
-                  <button
-                    className={`gallery-arrow gallery-arrow-right ${
-                      !canScrollRight
+                    <button
+                      className={`gallery-arrow gallery-arrow-right ${!canScrollRight
                         ? "hidden-arrow"
                         : ""
-                    }`}
-                    onClick={() =>
-                      scrollGallery(1)
-                    }
-                    disabled={!canScrollRight}
-                    aria-label="Next images"
-                  >
-                    ›
-                  </button>
+                        }`}
+                      onClick={() =>
+                        scrollGallery(1)
+                      }
+                      disabled={!canScrollRight}
+                      aria-label="Next images"
+                    >
+                      ›
+                    </button>
 
+
+                  </div>
 
                 </div>
 
-              </div>
-
-            )}
+              )}
 
           </div>
 
@@ -714,15 +733,13 @@ function CarDetailsPage() {
           >
 
             <img
-              className={`lightbox-image ${
-                zoomLevel > 1
-                  ? "lightbox-image-zoomed"
-                  : ""
-              } ${
-                isDragging
+              className={`lightbox-image ${zoomLevel > 1
+                ? "lightbox-image-zoomed"
+                : ""
+                } ${isDragging
                   ? "lightbox-image-dragging"
                   : ""
-              }`}
+                }`}
 
               src={currentImage}
 

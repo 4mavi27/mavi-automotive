@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import CarCard from "../components/CarCard.jsx"
-import cars from "../data/cars.js"
+//import cars from "../data/cars.js"
 import "../components/Cars.css"
 
 function CarsPage() {
@@ -343,7 +343,7 @@ function CarsPage() {
                   year={car.year}
                   mileage={car.mileage}
                   fuel={car.fuel}
-                  image={car.image}
+                  images={car.images}
                 />
               ))
             )}
