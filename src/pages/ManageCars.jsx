@@ -62,7 +62,7 @@ function ManageCars() {
 
             setCars((currentCars) =>
                 currentCars.filter(
-                    (car) => car._id !== id
+                    (car) => car.id !== id
                 )
             )
         } catch (error) {
@@ -194,7 +194,7 @@ function ManageCars() {
 
                                 {cars.map((car, index) => (
 
-                                    <tr key={car._id}>
+                                    <tr key={car.id}>
 
                                         {/* Short display ID */}
 
@@ -276,7 +276,7 @@ function ManageCars() {
                                             <div className="car-actions">
 
                                                 <Link
-                                                    to={`/admin/cars/edit/${car._id}`}
+                                                    to={`/admin/cars/edit/${car.id}`}
                                                     className="edit-car-btn"
                                                 >
                                                     Edit
@@ -287,7 +287,7 @@ function ManageCars() {
                                                     className="delete-car-btn"
                                                     onClick={() =>
                                                         handleDelete(
-                                                            car._id
+                                                            car.id
                                                         )
                                                     }
                                                 >

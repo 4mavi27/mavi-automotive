@@ -470,8 +470,8 @@ function AdminDashboard() {
                             {recentCars.map((car) => (
 
                                 <Link
-                                    key={car._id}
-                                    to={`/admin/cars/edit/${car._id}`}
+                                    key={car.id}
+                                    to={`/admin/cars/edit/${car.id}`}
                                     className="recent-car-card"
                                 >
 
