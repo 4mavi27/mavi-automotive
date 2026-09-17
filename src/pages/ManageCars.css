@@ -439,7 +439,6 @@
         font-size: 11px;
         font-weight: 700;
         text-transform: uppercase;
-
         flex-shrink: 0;
     }
 
@@ -455,5 +454,59 @@
     .edit-car-btn,
     .delete-car-btn {
         min-width: 70px;
+    }
+
+    .manage-cars-table {
+        display: block;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .manage-cars-table tbody,
+    .manage-cars-table tr {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .manage-cars-table td {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr);
+        align-items: center;
+        gap: 12px;
+
+        overflow-wrap: anywhere;
+    }
+
+    .manage-cars-table td::before {
+        grid-column: 1;
+    }
+
+    .manage-cars-table td>* {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .car-name-cell strong,
+    .table-featured-badge,
+    .manage-car-image,
+    .manage-car-image-placeholder,
+    .car-actions {
+        grid-column: 2;
+    }
+
+    .car-name-cell strong {
+        width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .car-actions {
+        flex-wrap: wrap;
+        justify-content: flex-start;
     }
 }
