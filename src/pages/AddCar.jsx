@@ -150,6 +150,7 @@ function AddCar() {
                 {
                     method: "POST",
                     body: formData,
+                    credentials: "include",
                 }
             )
 
@@ -184,6 +185,7 @@ function AddCar() {
                 "http://localhost:5000/api/cars",
                 {
                     method: "POST",
+                    credentials: "include",
                     headers: {
                         "Content-Type": "application/json",
                     },

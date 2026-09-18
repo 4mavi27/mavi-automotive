@@ -232,6 +232,7 @@ function EditCar() {
                     "http://localhost:5000/api/upload",
                     {
                         method: "POST",
+                        credentials: "include",
                         body: formData
                     }
                 )
@@ -282,6 +283,7 @@ function EditCar() {
                 `http://localhost:5000/api/cars/${id}`,
                 {
                     method: "PUT",
+                    credentials: "include",
                     headers: {
                         "Content-Type":
                             "application/json"

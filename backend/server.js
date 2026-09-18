@@ -6,13 +6,24 @@ import dotenv from "dotenv"
 import Car from "./models/car.js"
 import cloudinary from "./config/cloudinary.js"
 import upload from "./middleware/upload.js"
+import cookieParser from "cookie-parser"
+import authRoutes from "./routes/authRoutes.js"
+import protectAdmin from "./middleware/auth.js"
 
 dotenv.config()
 
 const app = express()
 
-app.use(cors())
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        credentials: true
+    })
+)
+
 app.use(express.json())
+app.use(cookieParser())
+app.use("/api/auth", authRoutes)
 
 
 mongoose
@@ -44,7 +55,7 @@ const uploadToCloudinary = (fileBuffer) => {
         stream.end(fileBuffer)
     })
 }
-app.post("/api/upload", upload.array("images", 25), async (req, res) => {
+app.post("/api/upload", protectAdmin, upload.array("images", 25), async (req, res) => {
     try {
         const uploadResults = await Promise.all(
             req.files.map((file) =>
@@ -96,7 +107,7 @@ app.get("/api/cars/:id", async (req, res) => {
     }
 })
 
-app.post("/api/cars", async (req, res) => {
+app.post("/api/cars", protectAdmin, async (req, res) => {
     try {
         const newCar = await Car.create(req.body)
 
@@ -108,7 +119,7 @@ app.post("/api/cars", async (req, res) => {
     }
 })
 
-app.delete("/api/cars/:id", async (req, res) => {
+app.delete("/api/cars/:id", protectAdmin, async (req, res) => {
     try {
         const deletedCar = await Car.findByIdAndDelete(req.params.id)
 
@@ -128,7 +139,7 @@ app.delete("/api/cars/:id", async (req, res) => {
     }
 })
 
-app.put("/api/cars/:id", async (req, res) => {
+app.put("/api/cars/:id", protectAdmin, async (req, res) => {
     try {
         const updatedCar = await Car.findByIdAndUpdate(
             req.params.id,

@@ -132,6 +132,34 @@
 .admin-nav-disabled {
     position: relative;
 }
+.admin-logout-btn {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    border-radius: 9px;
+
+    background: rgba(239, 68, 68, 0.08);
+    color: #ff8585;
+
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.admin-logout-btn:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+}
 
 .coming-soon-badge {
     margin-left: auto;

@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import "./AdminDashboard.css"
+import { useAuth } from "../context/AuthContext.jsx"
 
 function AdminDashboard() {
     const [cars, setCars] = useState([])
     const [loading, setLoading] = useState(true)
     const [errorMessage, setErrorMessage] = useState("")
+
+    const { admin, logout } = useAuth()
+
+    const handleLogout = async () => {
+        await logout()
+    }
 
     // =========================================
     // LOAD INVENTORY
@@ -124,6 +131,15 @@ function AdminDashboard() {
                         </span>
 
                         Settings
+                    </button>
+
+                    <button
+                        type="button"
+                        className="admin-logout-btn"
+                        onClick={handleLogout}
+                    >
+                        <span className="admin-nav-icon">↪</span>
+                        Logout {admin?.name && `— ${admin.name}`}
                     </button>
 
                 </nav>
@@ -478,7 +494,7 @@ function AdminDashboard() {
                                     <div className="recent-car-image">
 
                                         {car.images &&
-                                        car.images.length >
+                                            car.images.length >
                                             0 ? (
 
                                             <img
