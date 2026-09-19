@@ -8,6 +8,7 @@ import cloudinary from "./config/cloudinary.js"
 import upload from "./middleware/upload.js"
 import cookieParser from "cookie-parser"
 import authRoutes from "./routes/authRoutes.js"
+import enquiryRoutes from "./routes/enquiryRoutes.js"
 import protectAdmin from "./middleware/auth.js"
 
 dotenv.config()
@@ -24,6 +25,7 @@ app.use(
 app.use(express.json())
 app.use(cookieParser())
 app.use("/api/auth", authRoutes)
+app.use("/api/enquiries", enquiryRoutes)
 
 
 mongoose

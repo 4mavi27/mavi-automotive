@@ -7,6 +7,7 @@ function AdminDashboard() {
     const [cars, setCars] = useState([])
     const [loading, setLoading] = useState(true)
     const [errorMessage, setErrorMessage] = useState("")
+    const [enquiryCount, setEnquiryCount] = useState(0)
 
     const { admin, logout } = useAuth()
 
@@ -41,6 +42,32 @@ function AdminDashboard() {
                 setLoading(false)
             })
     }, [])
+    useEffect(() => {
+        fetch(
+            "http://localhost:5000/api/enquiries",
+            {
+                credentials: "include"
+            }
+        )
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(
+                        "Failed to fetch enquiries"
+                    )
+                }
+
+                return response.json()
+            })
+            .then((data) => {
+                setEnquiryCount(data.length)
+            })
+            .catch((error) => {
+                console.error(
+                    "Dashboard enquiries error:",
+                    error
+                )
+            })
+    }, [])
 
     // =========================================
     // DASHBOARD STATS
@@ -56,7 +83,7 @@ function AdminDashboard() {
     // so all stored cars are treated as available.
     const availableCars = totalCars
 
-    const enquiries = 0
+
 
     // Latest cars first
     const recentCars = [...cars]
@@ -107,20 +134,16 @@ function AdminDashboard() {
                         Manage Cars
                     </Link>
 
-                    <button
-                        type="button"
-                        className="admin-nav-item admin-nav-disabled"
+                    <Link
+                        to="/admin/enquiries"
+                        className="admin-nav-item"
                     >
                         <span className="admin-nav-icon">
                             ✉
                         </span>
 
                         Enquiries
-
-                        <span className="coming-soon-badge">
-                            Soon
-                        </span>
-                    </button>
+                    </Link>
 
                     <button
                         type="button"
@@ -304,7 +327,7 @@ function AdminDashboard() {
                             </h3>
 
                             <p>
-                                {enquiries}
+                                {enquiryCount}
                             </p>
                         </div>
 

@@ -23,6 +23,7 @@ import AdminDashboard from "./pages/AdminDashboard.jsx"
 import ManageCars from "./pages/ManageCars.jsx"
 import AddCar from "./pages/AddCar.jsx"
 import EditCar from "./pages/EditCar.jsx"
+import AdminEnquiries from "./pages/AdminEnquiries.jsx"
 
 import {
   AuthProvider
@@ -92,6 +93,14 @@ function AppContent() {
           element={
             <ProtectedRoute>
               <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/enquiries"
+          element={
+            <ProtectedRoute>
+              <AdminEnquiries />
             </ProtectedRoute>
           }
         />

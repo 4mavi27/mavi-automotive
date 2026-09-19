@@ -11,6 +11,8 @@ function Contact() {
 
   // Tracks whether the form has been successfully submitted
   const [submitted, setSubmitted] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Reads query parameters from the current URL
   const [searchParams] = useSearchParams()
@@ -23,26 +25,61 @@ function Contact() {
   const displayCar = selectedCar?.replace("-", " ")
 
   // Handles form submission
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
-    // Temporary output until the backend is connected
-    console.log(
-      name,
-      email,
-      phone,
-      displayCar,
-      message
-    )
+    setSubmitted(false)
+    setErrorMessage("")
+    setIsSubmitting(true)
 
-    // Show the success message
-    setSubmitted(true)
+    const enquiryMessage = displayCar
+      ? `Interested vehicle: ${displayCar}\n\n${message}`
+      : message
 
-    // Clear the form fields after submission
-    setName("")
-    setEmail("")
-    setPhone("")
-    setMessage("")
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/enquiries",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            message: enquiryMessage,
+            type: displayCar
+              ? "vehicle"
+              : "general"
+          })
+        }
+      )
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to submit enquiry"
+        )
+      }
+
+      setSubmitted(true)
+
+      setName("")
+      setEmail("")
+      setPhone("")
+      setMessage("")
+    } catch (error) {
+      console.error(
+        "Submit enquiry error:",
+        error
+      )
+
+      setErrorMessage(error.message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -106,9 +143,19 @@ function Contact() {
           required
         />
 
-        <button type="submit">
-          Submit Enquiry
+        <button
+          type="submit"
+          disabled={isSubmitting}
+        >
+          {isSubmitting
+            ? "Submitting..."
+            : "Submit Enquiry"}
         </button>
+        {errorMessage && (
+          <p className="contact-error-message">
+            {errorMessage}
+          </p>
+        )}
 
         {/* Display confirmation after successful submission */}
         {submitted && (
