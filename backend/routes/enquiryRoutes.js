@@ -1,5 +1,6 @@
 import express from "express"
 import Enquiry from "../models/Enquiry.js"
+import Car from "../models/car.js"
 import protectAdmin from "../middleware/auth.js"
 
 const router = express.Router()
@@ -11,7 +12,8 @@ router.post("/", async (req, res) => {
             email,
             phone = "",
             message,
-            type = "general"
+            type = "general",
+            carId = null
         } = req.body
 
         if (!name || !email || !message) {
@@ -20,12 +22,36 @@ router.post("/", async (req, res) => {
             })
         }
 
+        let vehicle
+
+        if (carId) {
+            const selectedCar = await Car.findById(carId)
+
+            if (!selectedCar) {
+                return res.status(404).json({
+                    message: "Selected vehicle not found"
+                })
+            }
+
+            vehicle = {
+                carId: selectedCar._id,
+                make: selectedCar.make,
+                model: selectedCar.model,
+                price: selectedCar.price,
+                year: selectedCar.year,
+                mileage: selectedCar.mileage,
+                fuel: selectedCar.fuel,
+                image: selectedCar.images?.[0] || ""
+            }
+        }
+
         const enquiry = await Enquiry.create({
             name,
             email,
             phone,
             message,
-            type
+            type,
+            vehicle
         })
 
         res.status(201).json({

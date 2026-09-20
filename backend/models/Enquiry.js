@@ -37,6 +37,44 @@ const enquirySchema = new mongoose.Schema(
             ],
             default: "general"
         },
+        vehicle: {
+            carId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Car"
+            },
+
+            make: {
+                type: String,
+                trim: true
+            },
+
+            model: {
+                type: String,
+                trim: true
+            },
+
+            price: {
+                type: Number
+            },
+
+            year: {
+                type: Number
+            },
+
+            mileage: {
+                type: Number
+            },
+
+            fuel: {
+                type: String,
+                trim: true
+            },
+
+            image: {
+                type: String,
+                default: ""
+            }
+        },
 
         status: {
             type: String,

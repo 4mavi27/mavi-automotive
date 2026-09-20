@@ -624,7 +624,11 @@ function CarDetailsPage() {
 
 
               <Link
-                to={`/contact?car=${car.make}-${car.model}`}
+                to={`/contact?carId=${encodeURIComponent(
+                  car._id || car.id
+                )}&car=${encodeURIComponent(
+                  `${car.make} ${car.model}`
+                )}`}
                 className="primary-detail-btn"
               >
                 Enquire Now

@@ -3,18 +3,29 @@
 ========================================================= */
 
 .admin-enquiries-page {
+    --page-bg: #08111f;
+    --panel-bg: #0e1929;
+    --panel-dark: #0a1422;
+    --border: #263a55;
+    --border-light: #345178;
+    --primary: #4d8cff;
+    --primary-light: #78aaff;
+    --text: #ffffff;
+    --muted: #98a7bc;
+
     min-height: 100vh;
     padding: 38px 32px 60px;
+    box-sizing: border-box;
 
     background:
         radial-gradient(
             circle at top right,
-            rgba(59, 130, 246, 0.08),
+            rgba(59, 130, 246, 0.09),
             transparent 32%
         ),
-        #08111f;
+        var(--page-bg);
 
-    color: #ffffff;
+    color: var(--text);
 }
 
 .admin-enquiries-container {
@@ -39,7 +50,7 @@
 .admin-enquiries-label {
     margin: 0 0 8px;
 
-    color: #4d8cff;
+    color: var(--primary);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 1.5px;
@@ -49,6 +60,7 @@
 .admin-enquiries-header h1 {
     margin: 0;
 
+    color: var(--text);
     font-size: 34px;
     line-height: 1.2;
 }
@@ -56,29 +68,39 @@
 .admin-enquiries-subtitle {
     margin: 8px 0 0;
 
-    color: #98a7bc;
+    color: var(--muted);
     font-size: 14px;
 }
 
 .enquiries-dashboard-link {
-    padding: 11px 16px;
+    min-height: 42px;
+    padding: 0 16px;
 
-    border: 1px solid #33445e;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #334966;
     border-radius: 8px;
 
     background: #142033;
-    color: #ffffff;
+    color: var(--text);
 
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;
 
-    transition: 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease;
 }
 
 .enquiries-dashboard-link:hover {
-    border-color: #4d8cff;
-    color: #78aaff;
+    border-color: var(--primary);
+    background: #182945;
+    color: var(--primary-light);
     transform: translateY(-1px);
 }
 
@@ -116,6 +138,7 @@
     display: grid;
     grid-template-columns:
         repeat(3, minmax(0, 1fr));
+    align-items: start;
     gap: 18px;
 }
 
@@ -126,18 +149,20 @@
 .enquiry-card {
     min-width: 0;
     padding: 20px;
+    box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
 
-    border: 1px solid #26364d;
+    border: 1px solid var(--border);
     border-radius: 14px;
 
-    background: linear-gradient(
-        145deg,
-        #101a2a,
-        #0c1625
-    );
+    background:
+        linear-gradient(
+            145deg,
+            #101c2e,
+            #0c1625
+        );
 
     box-shadow:
         0 12px 30px rgba(0, 0, 0, 0.18);
@@ -149,8 +174,7 @@
 }
 
 .enquiry-card:hover {
-    border-color: #385176;
-
+    border-color: var(--border-light);
     transform: translateY(-3px);
 
     box-shadow:
@@ -182,11 +206,11 @@
     border: 1px solid rgba(59, 130, 246, 0.35);
 
     background: rgba(59, 130, 246, 0.12);
-    color: #78aaff;
+    color: var(--primary-light);
 }
 
 /* =========================================================
-   STATUS COLOURS
+   STATUS BADGES
 ========================================================= */
 
 .enquiry-status.new {
@@ -200,7 +224,7 @@
     border: 1px solid rgba(59, 130, 246, 0.4);
 
     background: rgba(59, 130, 246, 0.12);
-    color: #78aaff;
+    color: var(--primary-light);
 }
 
 .enquiry-status.closed {
@@ -217,12 +241,14 @@
 .enquiry-card h2 {
     margin: 0 0 12px;
 
-    color: #ffffff;
+    color: var(--text);
     font-size: 20px;
+    line-height: 1.3;
+
     overflow-wrap: anywhere;
 }
 
-.enquiry-card a {
+.enquiry-card > a {
     width: fit-content;
     max-width: 100%;
     margin-bottom: 7px;
@@ -234,21 +260,25 @@
     overflow-wrap: anywhere;
 }
 
-.enquiry-card a:hover {
-    color: #ffffff;
+.enquiry-card > a:hover {
+    color: var(--text);
     text-decoration: underline;
 }
 
+/* =========================================================
+   MESSAGE
+========================================================= */
+
 .enquiry-message {
+    min-height: 76px;
     margin: 15px 0;
     padding: 14px;
-
-    flex: 1;
+    box-sizing: border-box;
 
     border: 1px solid #21334c;
     border-radius: 9px;
 
-    background: #0a1321;
+    background: var(--panel-dark);
     color: #d3dce9;
 
     font-size: 13px;
@@ -257,6 +287,96 @@
     white-space: pre-wrap;
     overflow-wrap: anywhere;
 }
+
+/* =========================================================
+   VEHICLE SNAPSHOT
+========================================================= */
+
+.enquiry-vehicle {
+    margin: 0 0 16px;
+    padding: 12px;
+
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+
+    border: 1px solid #29466d;
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(59, 130, 246, 0.1),
+            rgba(9, 20, 35, 0.9)
+        );
+}
+
+.enquiry-vehicle > img {
+    width: 112px;
+    height: 84px;
+
+    display: block;
+    object-fit: cover;
+
+    border: 1px solid #385274;
+    border-radius: 8px;
+}
+
+.enquiry-vehicle-info {
+    min-width: 0;
+}
+
+.enquiry-vehicle-info > span {
+    display: block;
+    margin-bottom: 5px;
+
+    color: var(--primary-light);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}
+
+.enquiry-vehicle-info h3 {
+    margin: 0 0 5px;
+
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+}
+
+.enquiry-vehicle-info > p {
+    margin: 0 0 9px;
+
+    color: var(--primary-light);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.enquiry-vehicle-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.enquiry-vehicle-specs span {
+    padding: 4px 6px;
+
+    border: 1px solid #2b405c;
+    border-radius: 5px;
+
+    background: #0a1422;
+    color: #aebdd0;
+
+    font-size: 9px;
+    line-height: 1.2;
+}
+
+/* =========================================================
+   DATE
+========================================================= */
 
 .enquiry-date {
     margin: 0 0 16px;
@@ -290,16 +410,20 @@
     outline: none;
 
     background: #0c1727;
-    color: #ffffff;
+    color: var(--text);
 
     font: inherit;
     font-size: 13px;
 
     cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .enquiry-card select:focus {
-    border-color: #4d8cff;
+    border-color: var(--primary);
 
     box-shadow:
         0 0 0 3px rgba(77, 140, 255, 0.12);
@@ -320,7 +444,7 @@
     border: 1px dashed #30425d;
     border-radius: 14px;
 
-    background: #101a2a;
+    background: var(--panel-bg);
 
     text-align: center;
 }
@@ -331,14 +455,14 @@
 
 .no-enquiries-card p {
     margin: 0;
-    color: #98a7bc;
+    color: var(--muted);
 }
 
 /* =========================================================
    TABLET
 ========================================================= */
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     .enquiries-grid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
@@ -356,9 +480,7 @@
 
     .enquiries-dashboard-link {
         width: 100%;
-
         box-sizing: border-box;
-        text-align: center;
     }
 
     .enquiries-grid {
@@ -385,5 +507,20 @@
 
     .enquiry-card-top {
         align-items: flex-start;
+    }
+
+    .enquiry-vehicle {
+        grid-template-columns: 96px minmax(0, 1fr);
+        gap: 11px;
+        padding: 10px;
+    }
+
+    .enquiry-vehicle > img {
+        width: 96px;
+        height: 76px;
+    }
+
+    .enquiry-vehicle-info h3 {
+        font-size: 13px;
     }
 }

@@ -174,6 +174,39 @@ function AdminEnquiries() {
                                 <p className="enquiry-message">
                                     {enquiry.message}
                                 </p>
+                                {enquiry.vehicle?.make && (
+                                    <div className="enquiry-vehicle">
+                                        {enquiry.vehicle.image && (
+                                            <img
+                                                src={enquiry.vehicle.image}
+                                                alt={`${enquiry.vehicle.make} ${enquiry.vehicle.model}`}
+                                            />
+                                        )}
+
+                                        <div className="enquiry-vehicle-info">
+                                            <span>ENQUIRED VEHICLE</span>
+
+                                            <h3>
+                                                {enquiry.vehicle.make}{" "}
+                                                {enquiry.vehicle.model}
+                                            </h3>
+
+                                            <p>
+                                                £{enquiry.vehicle.price?.toLocaleString()}
+                                            </p>
+
+                                            <div className="enquiry-vehicle-specs">
+                                                <span>{enquiry.vehicle.year}</span>
+
+                                                <span>
+                                                    {enquiry.vehicle.mileage?.toLocaleString()} miles
+                                                </span>
+
+                                                <span>{enquiry.vehicle.fuel}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
 
                                 <p className="enquiry-date">
                                     {new Date(

@@ -20,12 +20,25 @@ function CarCard(props) {
         <span>{props.mileage.toLocaleString()} miles</span>
         <span>{props.fuel}</span>
       </div>
-      <Link
-        to={`/cars/${props.id}`}
-        className="view-details-btn"
-      >
-        View Details
-      </Link>
+      <div className="car-card-actions">
+        <Link
+          to={`/cars/${props.id}`}
+          className="view-details-btn"
+        >
+          View Details
+        </Link>
+
+        <Link
+          to={`/contact?carId=${encodeURIComponent(
+            props.id
+          )}&car=${encodeURIComponent(
+            `${props.make} ${props.model}`
+          )}`}
+          className="enquire-car-btn"
+        >
+          Enquire
+        </Link>
+      </div>
     </div>
   )
 }

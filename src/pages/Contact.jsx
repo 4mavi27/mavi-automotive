@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import "./Contact.css"
 
@@ -16,6 +16,13 @@ function Contact() {
 
   // Reads query parameters from the current URL
   const [searchParams] = useSearchParams()
+  const carId = searchParams.get("carId")
+
+  const [selectedVehicle, setSelectedVehicle] =
+    useState(null)
+
+  const [vehicleLoading, setVehicleLoading] =
+    useState(false)
 
   // Gets the selected car from the URL
   // Example URL: /contact?car=BMW-320d
@@ -24,6 +31,42 @@ function Contact() {
   // Converts "BMW-320d" into "BMW 320d" for display
   const displayCar = selectedCar?.replace("-", " ")
 
+  useEffect(() => {
+    if (!carId) {
+      return
+    }
+
+    const loadSelectedVehicle = async () => {
+      setVehicleLoading(true)
+
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/cars/${carId}`
+        )
+
+        if (!response.ok) {
+          throw new Error(
+            "Selected vehicle could not be loaded"
+          )
+        }
+
+        const vehicle = await response.json()
+
+        setSelectedVehicle(vehicle)
+      } catch (error) {
+        console.error(
+          "Selected vehicle fetch error:",
+          error
+        )
+
+        setSelectedVehicle(null)
+      } finally {
+        setVehicleLoading(false)
+      }
+    }
+
+    loadSelectedVehicle()
+  }, [carId])
   // Handles form submission
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -32,9 +75,7 @@ function Contact() {
     setErrorMessage("")
     setIsSubmitting(true)
 
-    const enquiryMessage = displayCar
-      ? `Interested vehicle: ${displayCar}\n\n${message}`
-      : message
+    const enquiryMessage = message
 
     try {
       const response = await fetch(
@@ -49,9 +90,10 @@ function Contact() {
             email,
             phone,
             message: enquiryMessage,
-            type: displayCar
+            type: carId
               ? "vehicle"
-              : "general"
+              : "general",
+            carId: carId || null
           })
         }
       )
@@ -98,10 +140,44 @@ function Contact() {
       </div>
 
       {/* Show the selected vehicle only when it exists in the URL */}
-      {displayCar && (
-        <p className="selected-vehicle">
-          Interested Vehicle: {displayCar}
+      {vehicleLoading && (
+        <p className="selected-vehicle-loading">
+          Loading selected vehicle...
         </p>
+      )}
+
+      {selectedVehicle && (
+        <div className="selected-vehicle-card">
+          {selectedVehicle.images?.[0] && (
+            <img
+              src={selectedVehicle.images[0]}
+              alt={`${selectedVehicle.make} ${selectedVehicle.model}`}
+            />
+          )}
+
+          <div className="selected-vehicle-info">
+            <span>YOUR SELECTED VEHICLE</span>
+
+            <h2>
+              {selectedVehicle.make}{" "}
+              {selectedVehicle.model}
+            </h2>
+
+            <p className="selected-vehicle-price">
+              £{selectedVehicle.price.toLocaleString()}
+            </p>
+
+            <div className="selected-vehicle-specs">
+              <span>{selectedVehicle.year}</span>
+
+              <span>
+                {selectedVehicle.mileage.toLocaleString()} miles
+              </span>
+
+              <span>{selectedVehicle.fuel}</span>
+            </div>
+          </div>
+        </div>
       )}
 
       <form
