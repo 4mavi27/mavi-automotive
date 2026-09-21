@@ -41,7 +41,7 @@ function Contact() {
 
       try {
         const response = await fetch(
-          `http://localhost:5000/api/cars/${carId}`
+          `/api/cars/${carId}`
         )
 
         if (!response.ok) {
@@ -79,7 +79,7 @@ function Contact() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/enquiries",
+        "/api/enquiries",
         {
           method: "POST",
           headers: {

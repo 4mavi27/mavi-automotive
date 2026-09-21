@@ -18,7 +18,7 @@ function CarsPage() {
   const carsPerPage = 9
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/cars")
+    fetch("/api/cars")
       .then((response) => response.json())
       .then((data) => {
         setApiCars(data)

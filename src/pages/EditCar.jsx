@@ -40,7 +40,7 @@ function EditCar() {
     // =========================================
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/cars/${id}`)
+        fetch(`/api/cars/${id}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch car")
@@ -229,7 +229,7 @@ function EditCar() {
                 })
 
                 const uploadResponse = await fetch(
-                    "http://localhost:5000/api/upload",
+                    "/api/upload",
                     {
                         method: "POST",
                         credentials: "include",
@@ -280,7 +280,7 @@ function EditCar() {
             // =====================================
 
             const response = await fetch(
-                `http://localhost:5000/api/cars/${id}`,
+                `/api/cars/${id}`,
                 {
                     method: "PUT",
                     credentials: "include",

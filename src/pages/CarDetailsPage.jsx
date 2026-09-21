@@ -67,7 +67,7 @@ function CarDetailsPage() {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/cars/${id}`)
+    fetch(`/api/cars/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Car not found")

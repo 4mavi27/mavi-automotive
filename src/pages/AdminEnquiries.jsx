@@ -12,7 +12,7 @@ function AdminEnquiries() {
         const loadEnquiries = async () => {
             try {
                 const response = await fetch(
-                    "http://localhost:5000/api/enquiries",
+                    "/api/enquiries",
                     {
                         credentials: "include"
                     }
@@ -52,7 +52,7 @@ function AdminEnquiries() {
             setErrorMessage("")
 
             const response = await fetch(
-                `http://localhost:5000/api/enquiries/${enquiryId}/status`,
+                `/api/enquiries/${enquiryId}/status`,
                 {
                     method: "PATCH",
                     headers: {

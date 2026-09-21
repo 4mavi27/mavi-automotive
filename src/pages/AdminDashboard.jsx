@@ -20,7 +20,7 @@ function AdminDashboard() {
     // =========================================
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/cars")
+        fetch("/api/cars")
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch cars")
@@ -44,7 +44,7 @@ function AdminDashboard() {
     }, [])
     useEffect(() => {
         fetch(
-            "http://localhost:5000/api/enquiries",
+            "/api/enquiries",
             {
                 credentials: "include"
             }

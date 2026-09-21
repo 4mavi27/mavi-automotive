@@ -7,7 +7,7 @@ function Cars() {
   const [cars, setCars] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/cars")
+    fetch("/api/cars")
       .then((response) => response.json())
       .then((data) => {
         setCars(data)

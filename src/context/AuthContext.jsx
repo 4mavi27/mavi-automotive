@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
         async function checkAuthentication() {
             try {
                 const response = await fetch(
-                    "http://localhost:5000/api/auth/me",
+                    "/api/auth/me",
                     {
                         credentials: "include"
                     }
@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
 
     async function login(email, password) {
         const response = await fetch(
-            "http://localhost:5000/api/auth/login",
+            "/api/auth/login",
             {
                 method: "POST",
                 headers: {
@@ -72,7 +72,7 @@ export function AuthProvider({ children }) {
 
     async function logout() {
         await fetch(
-            "http://localhost:5000/api/auth/logout",
+            "/api/auth/logout",
             {
                 method: "POST",
                 credentials: "include"

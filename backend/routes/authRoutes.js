@@ -3,8 +3,20 @@ import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import Admin from "../models/Admin.js"
 import protectAdmin from "../middleware/auth.js"
+import { rateLimit } from "express-rate-limit"
 
 const router = express.Router()
+
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 10,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        message:
+            "Too many login attempts. Please try again later."
+    }
+})
 
 function getCookieOptions() {
     const isProduction =
@@ -13,12 +25,12 @@ function getCookieOptions() {
     return {
         httpOnly: true,
         secure: isProduction,
-        sameSite: isProduction ? "none" : "lax",
+        sameSite: "lax",
         maxAge: 24 * 60 * 60 * 1000
     }
 }
 
-router.post("/login", async (req, res) => {
+router.post("/login", loginLimiter, async (req, res) => {
     try {
         const { email, password } = req.body
 

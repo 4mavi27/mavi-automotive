@@ -2,10 +2,21 @@ import express from "express"
 import Enquiry from "../models/Enquiry.js"
 import Car from "../models/car.js"
 import protectAdmin from "../middleware/auth.js"
+import { rateLimit } from "express-rate-limit"
 
 const router = express.Router()
+const enquiryLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 5,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        message:
+            "Too many enquiries submitted. Please try again later."
+    }
+})
 
-router.post("/", async (req, res) => {
+router.post("/", enquiryLimiter, async (req, res) => {
     try {
         const {
             name,

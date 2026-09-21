@@ -146,7 +146,7 @@ function AddCar() {
             })
 
             const uploadResponse = await fetch(
-                "http://localhost:5000/api/upload",
+                "/api/upload",
                 {
                     method: "POST",
                     body: formData,
@@ -182,7 +182,7 @@ function AddCar() {
             // =====================================
 
             const carResponse = await fetch(
-                "http://localhost:5000/api/cars",
+                "/api/cars",
                 {
                     method: "POST",
                     credentials: "include",

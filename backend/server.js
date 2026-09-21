@@ -1,5 +1,8 @@
 import express from "express"
+import path from "path"
+import { fileURLToPath } from "url"
 import cors from "cors"
+import helmet from "helmet"
 //import cars from "./data/cars.js"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
@@ -13,14 +16,27 @@ import protectAdmin from "./middleware/auth.js"
 
 dotenv.config()
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+
+
 const app = express()
 
 app.use(
-    cors({
-        origin: "http://localhost:5173",
-        credentials: true
+    helmet({
+        contentSecurityPolicy: false
     })
 )
+
+if (process.env.NODE_ENV !== "production") {
+    app.use(
+        cors({
+            origin: "http://localhost:5173",
+            credentials: true
+        })
+    )
+}
 
 app.use(express.json())
 app.use(cookieParser())
@@ -37,7 +53,7 @@ mongoose
         console.log("MongoDB connection error:", error)
     })
 
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 
 const uploadToCloudinary = (fileBuffer) => {
     return new Promise((resolve, reject) => {
@@ -162,6 +178,24 @@ app.put("/api/cars/:id", protectAdmin, async (req, res) => {
         })
     }
 })
+if (process.env.NODE_ENV === "production") {
+    const frontendPath = path.resolve(
+        __dirname,
+        "../dist"
+    )
+
+    app.use(express.static(frontendPath))
+
+    app.get("/{*splat}", (req, res, next) => {
+        if (req.path.startsWith("/api")) {
+            return next()
+        }
+
+        res.sendFile(
+            path.join(frontendPath, "index.html")
+        )
+    })
+}
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
