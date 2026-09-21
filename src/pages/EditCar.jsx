@@ -83,6 +83,7 @@ function EditCar() {
             URL.createObjectURL(image)
         )
 
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setNewImagePreviews(previews)
 
         return () => {
@@ -117,7 +118,7 @@ function EditCar() {
                                 currentImage.name === image.name &&
                                 currentImage.size === image.size &&
                                 currentImage.lastModified ===
-                                    image.lastModified
+                                image.lastModified
                         )
                     )
                 }
@@ -513,7 +514,7 @@ function EditCar() {
                             onChange={(event) =>
                                 setFeatured(
                                     event.target.value ===
-                                        "true"
+                                    "true"
                                 )
                             }
                         >
@@ -604,9 +605,8 @@ function EditCar() {
                                     >
                                         <img
                                             src={image}
-                                            alt={`Vehicle ${
-                                                index + 1
-                                            }`}
+                                            alt={`Vehicle ${index + 1
+                                                }`}
                                         />
 
                                         {index === 0 && (
@@ -648,18 +648,17 @@ function EditCar() {
                                                 src={
                                                     preview
                                                 }
-                                                alt={`New vehicle ${
-                                                    index +
+                                                alt={`New vehicle ${index +
                                                     1
-                                                }`}
+                                                    }`}
                                             />
 
                                             {finalIndex ===
                                                 0 && (
-                                                <span className="main-image-label">
-                                                    Main
-                                                </span>
-                                            )}
+                                                    <span className="main-image-label">
+                                                        Main
+                                                    </span>
+                                                )}
 
                                             <span className="new-image-badge">
                                                 New

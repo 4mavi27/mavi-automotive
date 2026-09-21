@@ -88,7 +88,7 @@ app.post("/api/upload", protectAdmin, upload.array("images", 25), async (req, re
         res.status(200).json({
             images: imageUrls
         })
-    } catch (error) {
+    } catch  {
         res.status(500).json({
             message: "Failed to upload images"
         })
@@ -100,7 +100,7 @@ app.get("/api/cars", async (req, res) => {
     try {
         const cars = await Car.find()
         res.json(cars)
-    } catch (error) {
+    } catch {
         res.status(500).json({
             message: "Failed to fetch cars"
         })
@@ -118,7 +118,7 @@ app.get("/api/cars/:id", async (req, res) => {
         }
 
         res.json(car)
-    } catch (error) {
+    } catch {
         res.status(500).json({
             message: "Failed to fetch car"
         })
@@ -130,7 +130,7 @@ app.post("/api/cars", protectAdmin, async (req, res) => {
         const newCar = await Car.create(req.body)
 
         res.status(201).json(newCar)
-    } catch (error) {
+    } catch {
         res.status(500).json({
             message: "Failed to add car"
         })
@@ -150,7 +150,7 @@ app.delete("/api/cars/:id", protectAdmin, async (req, res) => {
         res.json({
             message: "Car deleted successfully"
         })
-    } catch (error) {
+    } catch {
         res.status(500).json({
             message: "Failed to delete car"
         })
@@ -172,7 +172,7 @@ app.put("/api/cars/:id", protectAdmin, async (req, res) => {
         }
 
         res.json(updatedCar)
-    } catch (error) {
+    } catch {
         res.status(500).json({
             message: "Failed to update car"
         })

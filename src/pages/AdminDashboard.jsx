@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import "./AdminDashboard.css"
-import { useAuth } from "../context/AuthContext.jsx"
+import useAuth from "../context/useAuth.js"
 
 function AdminDashboard() {
     const [cars, setCars] = useState([])

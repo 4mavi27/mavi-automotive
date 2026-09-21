@@ -25,9 +25,7 @@ import AddCar from "./pages/AddCar.jsx"
 import EditCar from "./pages/EditCar.jsx"
 import AdminEnquiries from "./pages/AdminEnquiries.jsx"
 
-import {
-  AuthProvider
-} from "./context/AuthContext.jsx"
+import AuthProvider from "./context/AuthContext.jsx"
 
 function AppContent() {
   const location = useLocation()

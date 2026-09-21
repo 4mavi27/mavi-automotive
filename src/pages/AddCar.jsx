@@ -40,6 +40,7 @@ function AddCar() {
             URL.createObjectURL(image)
         )
 
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setImagePreviews(previews)
 
         return () => {

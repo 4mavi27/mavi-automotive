@@ -1,13 +1,11 @@
 import {
-    createContext,
-    useContext,
     useEffect,
     useState
 } from "react"
 
-const AuthContext = createContext(null)
+import AuthContext from "./auth-context.js"
 
-export function AuthProvider({ children }) {
+function AuthProvider({ children }) {
     const [admin, setAdmin] = useState(null)
     const [loading, setLoading] = useState(true)
 
@@ -71,13 +69,17 @@ export function AuthProvider({ children }) {
     }
 
     async function logout() {
-        await fetch(
+        const response = await fetch(
             "/api/auth/logout",
             {
                 method: "POST",
                 credentials: "include"
             }
         )
+
+        if (!response.ok) {
+            throw new Error("Logout failed")
+        }
 
         setAdmin(null)
     }
@@ -96,6 +98,4 @@ export function AuthProvider({ children }) {
     )
 }
 
-export function useAuth() {
-    return useContext(AuthContext)
-}
+export default AuthProvider

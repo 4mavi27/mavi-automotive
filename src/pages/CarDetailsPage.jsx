@@ -90,7 +90,7 @@ function CarDetailsPage() {
     if (!car) {
       return
     }
-
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedImageIndex(0)
 
     setIsImageOpen(false)

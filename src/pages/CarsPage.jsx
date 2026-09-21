@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import CarCard from "../components/CarCard.jsx"
-//import cars from "../data/cars.js"
 import "../components/Cars.css"
 
 function CarsPage() {
@@ -8,23 +7,43 @@ function CarsPage() {
   const [sortOption, setSortOption] = useState("")
   const [fuelFilter, setFuelFilter] = useState("All")
   const [maxPrice, setMaxPrice] = useState("")
-  const [brandFilter, setBrandFilter] = useState("All")
-  const [showAllBrands, setShowAllBrands] = useState(false)
-  const [apiCars, setApiCars] = useState([])
+  const [brandFilter, setBrandFilter] =
+    useState("All")
 
-  // Pagination
+  const [showAllBrands, setShowAllBrands] =
+    useState(false)
+
+  const [apiCars, setApiCars] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
 
   const carsPerPage = 9
 
+  // =========================
+  // LOAD CARS
+  // =========================
+
   useEffect(() => {
-    fetch("/api/cars")
-      .then((response) => response.json())
-      .then((data) => {
+    const loadCars = async () => {
+      try {
+        const response = await fetch("/api/cars")
+
+        if (!response.ok) {
+          throw new Error("Failed to load cars")
+        }
+
+        const data = await response.json()
         setApiCars(data)
-        console.log(data)
-      })
+      } catch (error) {
+        console.error("Fetch cars error:", error)
+      }
+    }
+
+    loadCars()
   }, [])
+
+  // =========================
+  // BRANDS
+  // =========================
 
   const brands = [
     "BMW",
@@ -33,11 +52,17 @@ function CarsPage() {
     "Ford",
     "Toyota",
     "Volkswagen",
-    "Tesla",
+    "Tesla"
   ]
 
   const visibleBrands = brands.slice(0, 5)
   const extraBrands = brands.slice(5)
+
+  // Changes a filter and returns pagination to page 1.
+  const updateFilter = (setter, value) => {
+    setter(value)
+    setCurrentPage(1)
+  }
 
   // =========================
   // FILTER CARS
@@ -104,17 +129,6 @@ function CarsPage() {
     startIndex + carsPerPage
   )
 
-  // Go back to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [
-    search,
-    brandFilter,
-    fuelFilter,
-    maxPrice,
-    sortOption,
-  ])
-
   // =========================
   // RESET FILTERS
   // =========================
@@ -131,7 +145,6 @@ function CarsPage() {
 
   return (
     <section className="cars-page">
-
       {/* =====================
           PAGE HEADER
       ====================== */}
@@ -149,30 +162,35 @@ function CarsPage() {
           placeholder="Search by make or model..."
           value={search}
           onChange={(event) =>
-            setSearch(event.target.value)
+            updateFilter(
+              setSearch,
+              event.target.value
+            )
           }
         />
+
+        <p className="cars-count">
+          Browse all available vehicles. Showing:{" "}
+          {sortedCars.length}
+        </p>
       </div>
 
       {/* =====================
-          SIDEBAR + CARS
+          SIDEBAR + RESULTS
       ====================== */}
 
       <div className="cars-page-layout">
-
         {/* =====================
             SIDEBAR
         ====================== */}
 
         <aside className="cars-sidebar">
-
           {/* BRAND FILTER */}
 
           <div className="sidebar-section">
             <h3>Browse by Brand</h3>
 
             <div className="brand-list-vertical">
-
               <button
                 className={
                   brandFilter === "All"
@@ -180,7 +198,10 @@ function CarsPage() {
                     : "brand-row"
                 }
                 onClick={() =>
-                  setBrandFilter("All")
+                  updateFilter(
+                    setBrandFilter,
+                    "All"
+                  )
                 }
               >
                 All Brands
@@ -195,7 +216,10 @@ function CarsPage() {
                       : "brand-row"
                   }
                   onClick={() =>
-                    setBrandFilter(brand)
+                    updateFilter(
+                      setBrandFilter,
+                      brand
+                    )
                   }
                 >
                   {brand}
@@ -205,7 +229,10 @@ function CarsPage() {
               <button
                 className="browse-all-brands-btn"
                 onClick={() =>
-                  setShowAllBrands(!showAllBrands)
+                  setShowAllBrands(
+                    (currentValue) =>
+                      !currentValue
+                  )
                 }
               >
                 {showAllBrands
@@ -223,13 +250,15 @@ function CarsPage() {
                         : "brand-row"
                     }
                     onClick={() =>
-                      setBrandFilter(brand)
+                      updateFilter(
+                        setBrandFilter,
+                        brand
+                      )
                     }
                   >
                     {brand}
                   </button>
                 ))}
-
             </div>
           </div>
 
@@ -241,7 +270,10 @@ function CarsPage() {
             <select
               value={fuelFilter}
               onChange={(event) =>
-                setFuelFilter(event.target.value)
+                updateFilter(
+                  setFuelFilter,
+                  event.target.value
+                )
               }
             >
               <option value="All">
@@ -259,6 +291,10 @@ function CarsPage() {
               <option value="Electric">
                 Electric
               </option>
+
+              <option value="Hybrid">
+                Hybrid
+              </option>
             </select>
           </div>
 
@@ -269,10 +305,14 @@ function CarsPage() {
 
             <input
               type="number"
+              min="0"
               placeholder="Max price"
               value={maxPrice}
               onChange={(event) =>
-                setMaxPrice(event.target.value)
+                updateFilter(
+                  setMaxPrice,
+                  event.target.value
+                )
               }
             />
           </div>
@@ -285,7 +325,10 @@ function CarsPage() {
             <select
               value={sortOption}
               onChange={(event) =>
-                setSortOption(event.target.value)
+                updateFilter(
+                  setSortOption,
+                  event.target.value
+                )
               }
             >
               <option value="">
@@ -312,7 +355,6 @@ function CarsPage() {
           >
             Reset Filters
           </button>
-
         </aside>
 
         {/* =====================
@@ -320,14 +362,7 @@ function CarsPage() {
         ====================== */}
 
         <div className="cars-results">
-
-          <p className="cars-count">
-            Browse all available vehicles.
-            Showing: {sortedCars.length}
-          </p>
-
           <div className="car-list">
-
             {carsForCurrentPage.length === 0 ? (
               <p className="no-cars">
                 No cars found.
@@ -347,7 +382,6 @@ function CarsPage() {
                 />
               ))
             )}
-
           </div>
 
           {/* =====================
@@ -356,11 +390,12 @@ function CarsPage() {
 
           {totalPages > 1 && (
             <div className="pagination">
-
               <button
                 disabled={currentPage === 1}
                 onClick={() =>
-                  setCurrentPage(currentPage - 1)
+                  setCurrentPage(
+                    (page) => page - 1
+                  )
                 }
               >
                 Previous
@@ -394,15 +429,15 @@ function CarsPage() {
                   currentPage === totalPages
                 }
                 onClick={() =>
-                  setCurrentPage(currentPage + 1)
+                  setCurrentPage(
+                    (page) => page + 1
+                  )
                 }
               >
                 Next
               </button>
-
             </div>
           )}
-
         </div>
       </div>
     </section>

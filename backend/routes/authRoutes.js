@@ -86,7 +86,7 @@ router.post("/login", loginLimiter, async (req, res) => {
                 role: admin.role
             }
         })
-    } catch (error) {
+    } catch {
         res.status(500).json({
             message: "Failed to log in"
         })

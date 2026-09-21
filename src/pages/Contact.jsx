@@ -24,12 +24,7 @@ function Contact() {
   const [vehicleLoading, setVehicleLoading] =
     useState(false)
 
-  // Gets the selected car from the URL
-  // Example URL: /contact?car=BMW-320d
-  const selectedCar = searchParams.get("car")
 
-  // Converts "BMW-320d" into "BMW 320d" for display
-  const displayCar = selectedCar?.replace("-", " ")
 
   useEffect(() => {
     if (!carId) {

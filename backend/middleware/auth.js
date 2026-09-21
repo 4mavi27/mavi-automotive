@@ -29,7 +29,7 @@ async function protectAdmin(req, res, next) {
         req.admin = admin
 
         next()
-    } catch (error) {
+    } catch {
         return res.status(401).json({
             message: "Invalid or expired session"
         })
