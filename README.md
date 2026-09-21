@@ -8,6 +8,21 @@ A production-ready full-stack car dealership platform built with the MERN stack.
 
 > The application uses Render's free hosting tier, so the first request after inactivity may take up to a minute.
 
+## Screenshots
+
+### Home Page
+
+![Mavi Automotive home page](docs/screenshots/home.png)
+
+### Vehicle Listings
+
+![Mavi Automotive vehicle listings](docs/screenshots/cars.png)
+
+### Admin Dashboard
+
+![Mavi Automotive admin dashboard](docs/screenshots/admin-dashboard.png)
+
+
 ## Key Features
 
 ### Customer Website
