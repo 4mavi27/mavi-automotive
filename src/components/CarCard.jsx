@@ -1,4 +1,9 @@
 import { Link } from 'react-router-dom'
+import {
+  CalendarDays,
+  Gauge,
+  Fuel
+} from "lucide-react"
 import "./CarCard.css"
 function CarCard(props) {
   return (
@@ -16,9 +21,20 @@ function CarCard(props) {
       </p>
 
       <div className="car-details">
-        <span>{props.year}</span>
-        <span>{props.mileage.toLocaleString()} miles</span>
-        <span>{props.fuel}</span>
+        <span>
+          <CalendarDays aria-hidden="true" />
+          {props.year}
+        </span>
+
+        <span>
+          <Gauge aria-hidden="true" />
+          {props.mileage.toLocaleString()} miles
+        </span>
+
+        <span>
+          <Fuel aria-hidden="true" />
+          {props.fuel}
+        </span>
       </div>
       <div className="car-card-actions">
         <Link

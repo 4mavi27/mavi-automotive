@@ -11,6 +11,7 @@
 
   background: rgba(8, 11, 18, 0.96);
 
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 
   border-bottom: 1px solid var(--border);
@@ -19,19 +20,17 @@
     0 6px 20px rgba(0, 0, 0, 0.22);
 }
 
-
 /* =========================
    NAVBAR INNER
 ========================= */
 
 .navbar-container {
+  min-height: 78px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  min-height: 78px;
 }
-
 
 /* =========================
    BRAND
@@ -40,32 +39,63 @@
 .navbar-brand {
   margin: 0;
 
-  color: var(--text-main);
+  display: inline-flex;
+  align-items: center;
+
+  color: #ffffff;
 
   font-size: 25px;
   font-weight: 700;
-
+  line-height: 1;
   letter-spacing: 0.3px;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
+.navbar-brand span {
+  margin-right: 5px;
+
+  color: #4d8cff;
+  font-weight: 800;
+
+  transition: color 0.25s ease;
+}
+
+.navbar-brand:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.navbar-brand:hover span {
+  color: #78aaff;
+}
+
+/* Brand par navigation underline na lage */
+.navbar-brand::after {
+  display: none;
+}
 
 /* =========================
-   LINKS
+   NAVIGATION LINKS
 ========================= */
 
-.navbar ul {
-  display: flex;
-  align-items: center;
-
-  gap: 30px;
-
+.navbar .nav-links {
   margin: 0;
   padding: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 30px;
 
   list-style: none;
 }
 
-.navbar a {
+.navbar .nav-links a {
   position: relative;
 
   padding: 10px 0;
@@ -74,22 +104,19 @@
 
   font-size: 15px;
   font-weight: 500;
-
   text-decoration: none;
 
   transition: color 0.25s ease;
 }
 
-
 /* =========================
-   UNDERLINE
+   LINK UNDERLINE
 ========================= */
 
-.navbar a::after {
+.navbar .nav-links a::after {
   content: "";
 
   position: absolute;
-
   left: 0;
   bottom: 3px;
 
@@ -101,63 +128,62 @@
   transition: width 0.25s ease;
 }
 
-
 /* =========================
-   HOVER
+   LINK HOVER
 ========================= */
 
-.navbar a:hover {
+.navbar .nav-links a:hover {
   color: var(--accent);
 }
 
-.navbar a:hover::after {
+.navbar .nav-links a:hover::after {
   width: 100%;
 }
-
 
 /* =========================
    ACTIVE PAGE
 ========================= */
 
-.navbar a.active-link {
+.navbar .nav-links a.active-link {
   color: var(--accent);
 }
 
-.navbar a.active-link::after {
+.navbar .nav-links a.active-link::after {
   width: 100%;
 }
+
+/* =========================
+   KEYBOARD FOCUS
+========================= */
+
+.navbar a:focus-visible,
+.menu-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+  border-radius: 3px;
+}
+
+/* =========================
+   MENU BUTTON
+========================= */
 
 .menu-toggle {
   display: none;
 }
-
 
 /* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 700px) {
-
-
   .navbar-container {
+    min-height: auto;
+    padding-top: 14px;
+    padding-bottom: 14px;
+
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
-
-  .navbar .nav-links {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    padding-top: 12px;
-  }
-
-  .navbar .nav-links.open {
-    display: flex;
   }
 
   .navbar-brand {
@@ -165,19 +191,66 @@
   }
 
   .menu-toggle {
-    display: block;
-    background: none;
-    border: none;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--bg-soft);
     color: var(--text-main);
-    font-size: 28px;
+
+    font-size: 24px;
+    line-height: 1;
+
     cursor: pointer;
+
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease,
+      background 0.25s ease;
+  }
+
+  .menu-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
   .navbar .nav-links {
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 10px;
+
     display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3px;
+
+    border-top: 1px solid var(--border);
   }
 
   .navbar .nav-links.open {
     display: flex;
+  }
+
+  .navbar .nav-links li {
+    width: 100%;
+  }
+
+  .navbar .nav-links a {
+    width: 100%;
+    padding: 12px 4px;
+
+    display: block;
+    box-sizing: border-box;
+  }
+
+  .navbar .nav-links a::after {
+    bottom: 5px;
   }
 }

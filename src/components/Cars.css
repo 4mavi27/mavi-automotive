@@ -39,6 +39,7 @@
   animation-play-state: paused;
 }
 
+
 @keyframes moveCars {
   from {
     transform: translateX(0);
@@ -86,6 +87,74 @@
 
   background: var(--bg-soft);
   color: var(--text-main);
+}
+
+/* =========================================================
+   COMPACT FEATURED CARDS — HOME PAGE ONLY
+========================================================= */
+
+.cars-slider .car-card {
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.cars-slider .car-card>img {
+  height: 190px;
+  object-fit: cover;
+}
+
+.cars-slider .car-card h3 {
+  margin: 14px 0 5px;
+
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.cars-slider .car-model {
+  min-height: 38px;
+  margin: 0 0 8px;
+
+  display: -webkit-box;
+  overflow: hidden;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  line-height: 1.35;
+}
+
+.cars-slider .car-price {
+  margin: 0 0 10px;
+
+  font-size: 19px;
+}
+
+.cars-slider .car-details {
+  padding: 10px 0;
+  gap: 8px;
+
+  font-size: 11px;
+}
+
+.cars-slider .car-card-actions {
+  margin-top: auto;
+  padding-top: 10px;
+
+  grid-template-columns: 1fr;
+  gap: 7px;
+}
+
+.cars-slider .view-details-btn,
+.cars-slider .enquire-car-btn {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+
+  box-sizing: border-box;
+
+  font-size: 13px;
 }
 
 

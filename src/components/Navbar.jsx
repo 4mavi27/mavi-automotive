@@ -1,35 +1,68 @@
 import { useState } from "react"
-import { NavLink } from "react-router-dom"
+import {
+  NavLink,
+  Link
+} from "react-router-dom"
 import "./Navbar.css"
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const closeMenu = () => {
+    setMenuOpen(false)
+  }
+
+  const getLinkClass = ({ isActive }) =>
+    isActive ? "active-link" : ""
+
   return (
     <nav className="navbar">
       <div className="container navbar-container">
 
-        <h2 className="navbar-brand">
-          Mavi Automotive
-        </h2>
-        <button
-          className="menu-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-
+        {/* Clickable website brand */}
+        <Link
+          to="/"
+          className="navbar-brand"
+          onClick={closeMenu}
+          aria-label="Mavi Automotive home"
         >
-          ☰
+          <span>Mavi</span>{" "}
+          Automotive
+        </Link>
+
+        {/* Mobile menu button */}
+        <button
+          type="button"
+          className="menu-toggle"
+          onClick={() =>
+            setMenuOpen((currentState) => !currentState)
+          }
+          aria-label={
+            menuOpen
+              ? "Close navigation menu"
+              : "Open navigation menu"
+          }
+          aria-expanded={menuOpen}
+          aria-controls="main-navigation"
+        >
+          {menuOpen ? "✕" : "☰"}
         </button>
 
+        {/* Navigation links */}
         <ul
-          className={menuOpen ? "nav-links open" : "nav-links"}
-          onClick={() => setMenuOpen(false)}
+          id="main-navigation"
+          className={
+            menuOpen
+              ? "nav-links open"
+              : "nav-links"
+          }
         >
           <li>
             <NavLink
               to="/"
               end
-              className={({ isActive }) =>
-                isActive ? "active-link" : ""
-              }
+              className={getLinkClass}
+              onClick={closeMenu}
             >
               Home
             </NavLink>
@@ -38,9 +71,8 @@ function Navbar() {
           <li>
             <NavLink
               to="/cars"
-              className={({ isActive }) =>
-                isActive ? "active-link" : ""
-              }
+              className={getLinkClass}
+              onClick={closeMenu}
             >
               Cars
             </NavLink>
@@ -49,9 +81,8 @@ function Navbar() {
           <li>
             <NavLink
               to="/finance"
-              className={({ isActive }) =>
-                isActive ? "active-link" : ""
-              }
+              className={getLinkClass}
+              onClick={closeMenu}
             >
               Finance
             </NavLink>
@@ -60,9 +91,8 @@ function Navbar() {
           <li>
             <NavLink
               to="/sell-your-car"
-              className={({ isActive }) =>
-                isActive ? "active-link" : ""
-              }
+              className={getLinkClass}
+              onClick={closeMenu}
             >
               Sell Your Car
             </NavLink>
@@ -71,9 +101,8 @@ function Navbar() {
           <li>
             <NavLink
               to="/about"
-              className={({ isActive }) =>
-                isActive ? "active-link" : ""
-              }
+              className={getLinkClass}
+              onClick={closeMenu}
             >
               About
             </NavLink>
@@ -82,9 +111,8 @@ function Navbar() {
           <li>
             <NavLink
               to="/contact"
-              className={({ isActive }) =>
-                isActive ? "active-link" : ""
-              }
+              className={getLinkClass}
+              onClick={closeMenu}
             >
               Contact
             </NavLink>
